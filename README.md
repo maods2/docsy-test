@@ -42,7 +42,7 @@ The blog section at `/blog/` lists 12 dummy posts with 5 per page:
 - Page 2: `/blog/page/2/`
 - Page 3: `/blog/page/3/`
 
-See [Pagination Guide](content/en/docs/pagination-guide.md) for details.
+See [Pagination Guide](https://maods2.github.io/docsy-test/docs/pagination-guide/) for details.
 
 ## Deploy to GitHub Pages
 
