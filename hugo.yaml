@@ -1,0 +1,41 @@
+baseURL: https://maods2.github.io/docsy-test/
+title: Docsy Test
+
+contentDir: content/en
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+
+enableRobotsTXT: true
+enableGitInfo: true
+
+pagination:
+  pagerSize: 5
+  path: page
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: tango
+
+outputs:
+  home: [HTML, RSS]
+  section: [HTML, RSS]
+
+params:
+  github_repo: https://github.com/maods2/docsy-test
+  github_branch: main
+  offlineSearch: true
+  ui:
+    breadcrumb_disable: false
+    sidebar_menu_foldable: true
+    showLightDarkModeMenu: true
+
+module:
+  hugoVersion:
+    extended: true
+    min: 0.157.0
+  imports:
+    - path: github.com/google/docsy
+      disable: false
