@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -22,6 +22,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -38,8 +48,8 @@ jobs:
 
       - run: npm ci
       - run: >-
-          hugo --baseURL https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-          --minify
+          hugo --minify
+          --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -56,3 +66,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 900000
+          error_count: 15
+          reporting_interval: 10000
+
+      # GitHub Pages backend sometimes fails transiently on the first attempt.
+      - name: Wait before retry
+        if: failure() && steps.deployment.outcome == 'failure'
+        run: sleep 60
+
+      - name: Retry deploy
+        id: deployment-retry
+        if: failure() && steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 900000
+          error_count: 15
+          reporting_interval: 10000
