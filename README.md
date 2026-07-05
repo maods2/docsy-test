@@ -47,8 +47,8 @@ See [Pagination Guide](content/en/docs/pagination-guide.md) for details.
 ## Deploy to GitHub Pages
 
 1. Push this repo to GitHub
-2. In **Settings → Pages**, set source to **Deploy from a branch** and select **gh-pages**
-3. Push to `main` — the GitHub Actions workflow builds and deploys automatically
+2. In **Settings → Pages**, set **Build and deployment → Source** to **GitHub Actions**
+3. Push to `main` — the workflow builds and deploys automatically
 
 The workflow sets the correct `baseURL` for `https://<username>.github.io/docsy-test/`.
 
