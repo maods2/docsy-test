@@ -27,6 +27,8 @@ params:
   github_repo: https://github.com/maods2/docsy-test
   github_branch: main
   offlineSearch: true
+  mermaid:
+    theme: forest
   ui:
     breadcrumb_disable: false
     sidebar_menu_foldable: true
